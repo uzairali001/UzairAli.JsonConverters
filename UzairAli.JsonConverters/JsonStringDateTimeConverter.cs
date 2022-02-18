@@ -27,7 +27,7 @@ public class JsonStringDateTimeConverter : JsonConverterFactory
 
         public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
         {
-            writer.WriteStringValue(value.ToString() ?? string.Empty);
+            writer.WriteStringValue(value.ToString("O") ?? string.Empty);
         }
     }
 

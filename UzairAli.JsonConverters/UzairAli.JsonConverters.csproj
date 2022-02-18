@@ -9,7 +9,7 @@
 
 	  <PackageId>UzairAli.JsonConverters</PackageId>
 	  <PackageTags>Json Converters</PackageTags>
-	  <Version>0.1.4</Version>
+	  <Version>0.1.5</Version>
 	  <Authors>Uzair Ali</Authors>
 	  <Company>Uzair Ali</Company>
 	  <Description>This library provides common json converters for System.Text.Json</Description>

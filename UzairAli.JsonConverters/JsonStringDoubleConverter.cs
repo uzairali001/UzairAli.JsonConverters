@@ -27,7 +27,7 @@ public class JsonStringDoubleConverter : JsonConverterFactory
 
         public override void Write(Utf8JsonWriter writer, double value, JsonSerializerOptions options)
         {
-            writer.WriteStringValue(value.ToString() ?? string.Empty);
+            writer.WriteNumberValue(value);
         }
     }
 
@@ -45,7 +45,7 @@ public class JsonStringDoubleConverter : JsonConverterFactory
                 writer.WriteNullValue();
                 return;
             }
-            writer.WriteStringValue(value.Value.ToString());
+            writer.WriteNumberValue(value.Value);
         }
     }
 

@@ -53,8 +53,8 @@ public class JsonStringGuidConverter : JsonConverterFactory
     {
         return reader.TokenType switch
         {
-            JsonTokenType.Null => default,
-            _ => string.IsNullOrEmpty(reader.GetString()) is false ? new Guid(reader.GetString()!) : default,
+            JsonTokenType.Null => null,
+            _ => string.IsNullOrEmpty(reader.GetString()) is false ? new Guid(reader.GetString()!) : null,
         };
     }
 }

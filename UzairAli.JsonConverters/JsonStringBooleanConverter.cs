@@ -24,14 +24,7 @@ public class JsonStringBooleanConverter : JsonConverterFactory
     {
         public override bool Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            return reader.TokenType switch
-            {
-                JsonTokenType.Null => default,
-                JsonTokenType.True => true,
-                JsonTokenType.False => false,
-                JsonTokenType.Number => reader.GetInt32() is 1,
-                _ => string.IsNullOrEmpty(reader.GetString()) is false && ParseBoolean(reader.GetString()),
-            };
+            return GetValue(ref reader) ?? false;
         }
 
         public override void Write(Utf8JsonWriter writer, bool value, JsonSerializerOptions options)
@@ -44,14 +37,7 @@ public class JsonStringBooleanConverter : JsonConverterFactory
     {
         public override bool? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            return reader.TokenType switch
-            {
-                JsonTokenType.Null => default,
-                JsonTokenType.True => true,
-                JsonTokenType.False => false,
-                JsonTokenType.Number => reader.GetInt32() is 1,
-                _ => string.IsNullOrEmpty(reader.GetString()) is false && ParseBoolean(reader.GetString()),
-            };
+            return GetValue(ref reader);
         }
 
         public override void Write(Utf8JsonWriter writer, bool? value, JsonSerializerOptions options)
@@ -67,11 +53,23 @@ public class JsonStringBooleanConverter : JsonConverterFactory
 
     }
 
-    private static bool ParseBoolean(string? value)
+    private static bool? GetValue(ref Utf8JsonReader reader)
+    {
+        return reader.TokenType switch
+        {
+            JsonTokenType.Null => default,
+            JsonTokenType.True => true,
+            JsonTokenType.False => false,
+            JsonTokenType.Number => reader.GetInt32() is 1,
+            _ => string.IsNullOrEmpty(reader.GetString()) is false ? ParseBoolean(reader.GetString()!) : default,
+        };
+    }
+
+    private static bool? ParseBoolean(string? value)
     {
         return value?.ToLower().Trim() switch
         {
-            null => default,
+            null => null,
             "true" or "yes" or "y" or "1" or "t" => true,
             _ => false,
         };

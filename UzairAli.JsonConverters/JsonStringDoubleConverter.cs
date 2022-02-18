@@ -54,6 +54,7 @@ public class JsonStringDoubleConverter : JsonConverterFactory
         return reader.TokenType switch
         {
             JsonTokenType.Null => default,
+            JsonTokenType.Number => reader.GetDouble(),
             _ => string.IsNullOrEmpty(reader.GetString()) is false ? double.Parse(reader.GetString()!) : null,
         };
     }

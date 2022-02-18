@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFrameworks>netstandard2.0;netstandard2.1;netcoreapp2.1;netcoreapp2.2;netcoreapp3.0;netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
+
+	  <LangVersion>LatestMajor</LangVersion>
+	  <Nullable>enable</Nullable>
+	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
+	  <PackageId>UzairAli.JsonConverters</PackageId>
+	  <PackageTags>Json Converters</PackageTags>
+	  <Version>0.1.0</Version>
+	  <Authors>Uzair Ali</Authors>
+	  <Company>Uzair Ali</Company>
+	  <Description>This library provides common json converters for System.Text.Json</Description>
+
+	  <dependencies>
+		  <group targetFramework="netcoreapp2.1;netcoreapp2.2;netcoreapp3.0">
+			  <dependency id="System.Text.Json" version="5.*" />
+		  </group>
+		  <group targetFramework="netstandard2.0;netstandard2.1;netcoreapp3.1;net5.0;net6.0">
+			  <dependency id="System.Text.Json" version="6.*" />
+		  </group>
+	  </dependencies>
+
+	  <RepositoryUrl>https://github.com/uzairali001/UzairAli.JsonConverters.git</RepositoryUrl>
+
+	  <RepositoryType>git</RepositoryType>
+
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+  </PropertyGroup>
+
+	<ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.1' or '$(TargetFramework)' == 'netcoreapp2.2' or '$(TargetFramework)' == 'netcoreapp3.0'">
+		<PackageReference Include="System.Text.Json" Version="5.0.2" />
+	</ItemGroup>
+
+	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'netstandard2.1' or '$(TargetFramework)' == 'netcoreapp3.1' or '$(TargetFramework)' == 'net5.0' or '$(TargetFramework)' == 'net6.0'">
+		<PackageReference Include="System.Text.Json" Version="6.0.0" />
+	</ItemGroup>
+
+</Project>
